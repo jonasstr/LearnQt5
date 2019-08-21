@@ -1,3 +1,5 @@
+QT += quickcontrols2
+
 TEMPLATE = subdirs
 
 SUBDIRS += \

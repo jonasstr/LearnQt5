@@ -18,7 +18,8 @@ SOURCES += src/models/client.cpp \
 
 HEADERS += src/models/client.h \
         src/cm-lib_global.h \
-        src/controllers/master-controller.h
+        src/controllers/master-controller.h \
+    src/controllers/navigation-controller.h
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj

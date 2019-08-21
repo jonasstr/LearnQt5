@@ -1,7 +1,7 @@
 include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
-QT += qml quick
+QT += qml quick quickcontrols2
 
 TEMPLATE = app
 
@@ -15,7 +15,7 @@ INCLUDEPATH += source \
 SOURCES += src/main.cpp
 RESOURCES += views.qrc
 
-QML_IMPORT_PATH = $$PWD
+#QML_IMPORT_PATH += $$PWD
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj
