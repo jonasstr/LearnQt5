@@ -13,9 +13,11 @@ INCLUDEPATH += source \
             ../cm-lib/src
 
 SOURCES += src/main.cpp
-RESOURCES += views.qrc
+RESOURCES += views.qrc \
+    assets.qrc \
+    components.qrc
 
-#QML_IMPORT_PATH += $$PWD
+QML_IMPORT_PATH += $$PWD
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj
