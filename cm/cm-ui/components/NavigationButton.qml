@@ -41,17 +41,6 @@ Item {
             }
         }
 
-        states: [
-            State {
-                name: "hover"
-                PropertyChanges {
-                    target: background
-                    color: hoverColor
-                }
-            }
-
-        ]
-
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
@@ -60,5 +49,15 @@ Item {
             onExited: background.state = ""
             onClicked: navigationButtonClicked()
         }
+
+        states: [
+            State {
+                name: "hover"
+                PropertyChanges {
+                    target: background
+                    color: hoverColor
+                }
+            }
+        ]
     }
 }

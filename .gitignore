@@ -1,3 +1,6 @@
+# Book PDF
+*.pdf
+
 # Build folders
 /shadow-builds
 build/

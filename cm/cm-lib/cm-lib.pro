@@ -14,12 +14,16 @@ DEFINES += CMLIB_LIBRARY \
 INCLUDEPATH += src
 
 SOURCES += src/models/client.cpp \
-        src/controllers/master-controller.cpp
+        src/controllers/master-controller.cpp \
+    src/framework/command.cpp \
+    src/controllers/command-controller.cpp
 
 HEADERS += src/models/client.h \
         src/cm-lib_global.h \
         src/controllers/master-controller.h \
-    src/controllers/navigation-controller.h
+    src/controllers/navigation-controller.h \
+    src/framework/command.h \
+    src/controllers/command-controller.h
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj
