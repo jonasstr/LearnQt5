@@ -17,12 +17,15 @@ SOURCES += src/models/client.cpp \
         src/controllers/master-controller.cpp \
     src/framework/command.cpp \
     src/controllers/command-controller.cpp \
-    data/int-decorator.cpp \
-    data/enumerator-decorator.cpp \
-    data/datetime-decorator.cpp \
-    data/data-decorator.cpp \
-    data/string-decorator.cpp \
-    data/entity.cpp
+    src/data/int-decorator.cpp \
+    src/data/enumerator-decorator.cpp \
+    src/data/datetime-decorator.cpp \
+    src/data/data-decorator.cpp \
+    src/data/string-decorator.cpp \
+    src/data/entity.cpp \
+    src/models/address.cpp \
+    src/models/appointment.cpp \
+    src/models/contact.cpp
 
 HEADERS += src/models/client.h \
         src/cm-lib_global.h \
@@ -30,13 +33,16 @@ HEADERS += src/models/client.h \
     src/controllers/navigation-controller.h \
     src/framework/command.h \
     src/controllers/command-controller.h \
-    data/string-decorator.h \
-    data/int-decorator.h \
-    data/enumerator-decorator.h \
-    data/datetime-decorator.h \
-    data/data-decorator.h \
-    data/entity.h \
-    data/entity-collection.h
+    src/data/string-decorator.h \
+    src/data/int-decorator.h \
+    src/data/enumerator-decorator.h \
+    src/data/datetime-decorator.h \
+    src/data/data-decorator.h \
+    src/data/entity.h \
+    src/data/entity-collection.h \
+    src/models/address.h \
+    src/models/appointment.h \
+    src/models/contact.h
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj

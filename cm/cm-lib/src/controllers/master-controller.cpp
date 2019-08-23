@@ -7,13 +7,17 @@ class MasterController::Implementation {
 public:
     Implementation(MasterController* controller)
         : masterController(controller) {
+
         commandController = new CommandController(masterController);
         navigationController = new NavigationController(masterController);
+        newClient = new Client(masterController);
     }
 
-    MasterController* masterController{};
-    CommandController* commandController{};
-    NavigationController* navigationController{};
+    MasterController* masterController;
+    CommandController* commandController;
+    NavigationController* navigationController;
+    Client* newClient;
+
     QString welcomeMessage = "Hello there, General Kenobi!";
 };
 
@@ -29,6 +33,10 @@ CommandController* MasterController::commandController() {
 
 NavigationController* MasterController::navigationController() {
     return impl->navigationController;
+}
+
+Client*MasterController::newClient() {
+    return impl->newClient;
 }
 
 const QString& MasterController::welcomeMessage() const {
