@@ -18,8 +18,11 @@ linux {
 		QMAKE_TARGET.arch = x86_64
 	}
 	linux-g++{
-        CONFIG += COMPILER_GCC
+            CONFIG += COMPILER_GCC
 	}
+        linux-clang{
+            CONFIG += COMPILER_CLANG
+        }
 }
 
 macx {

@@ -18,7 +18,7 @@ public:
     NavigationController* navigationController;
     Client* newClient;
 
-    QString welcomeMessage = "Hello there, General Kenobi!";
+    QString welcomeMessage = "Welcome to the Client Management system!";
 };
 
 MasterController::MasterController(QObject *parent) : QObject(parent) {

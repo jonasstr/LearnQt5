@@ -13,9 +13,16 @@ CONFIG -= app_bundle
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-INCLUDEPATH += src
+INCLUDEPATH += src \
+    ../cm-lib/src
 
-SOURCES += src/models/client-tests.cpp
+HEADERS += \
+    src/test-suite.h \
+    src/controllers/master-controller-tests.h
+
+SOURCES += src/test-suite.cpp \
+    src/controllers/master-controller-tests.cpp \
+    src/test-main.cpp
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj

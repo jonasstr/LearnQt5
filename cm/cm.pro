@@ -9,3 +9,4 @@ SUBDIRS += \
 
 cm-ui.depends = cm-lib
 cm-tests.depends = cm-lib
+cm-tests.depends = cm-ui

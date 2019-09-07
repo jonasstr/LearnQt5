@@ -1,0 +1,21 @@
+QML linker command failed, unknown reference to method
+→ check if method is implemented in .cpp file
+→ check for duplicate main.cpp files in different submodules, rename them
+
+Subdirs project cannot find dependency
+→ check order of SUBDIRS folders in cm.pro file or add depends, e.g.:
+cm-ui.depends = cm-lib
+cm-tests.depends = cm-lib
+
+→ Include <LIBNAME>SHARED_EXPORT for every class that interacts with QML, e.g.:
+
+→ class CMLIBSHARED_EXPORT CommandController: public QObject {}
+
+Unable to assign [undefined] to QString:
+→ Check that Q_PROPERTY exists when accessing ui_property
+
+Symbol lookup error for class: undefined symbol:
+→ Replace 
+virtual ~SomeClassName();
+with
+virtual ~SomeClassName() {}
