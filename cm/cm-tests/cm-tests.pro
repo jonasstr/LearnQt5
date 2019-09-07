@@ -18,11 +18,19 @@ INCLUDEPATH += src \
 
 HEADERS += \
     src/test-suite.h \
-    src/controllers/master-controller-tests.h
+    src/controllers/master-controller-tests.h \
+    src/data/int-decorator-tests.h \
+    src/data/datetime-decorator-tests.h \
+    src/data/enumerator-decorator-tests.h \
+    src/data/string-decorator-tests.h
 
 SOURCES += src/test-suite.cpp \
     src/controllers/master-controller-tests.cpp \
-    src/test-main.cpp
+    src/test-main.cpp \
+    src/data/int-decorator-tests.cpp \
+    src/data/datetime-decorator-tests.cpp \
+    src/data/enumerator-decorator-tests.cpp \
+    src/data/string-decorator-tests.cpp
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj

@@ -16,7 +16,7 @@ public:
 
 IntDecorator::IntDecorator(Entity* parent, const QString& key,
                                  const QString& label, int value)
-    : DataDecorator(parent) {
+    : DataDecorator(parent, key, label) {
 
     impl.reset(new Implementation(this, value));
 }

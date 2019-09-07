@@ -11,22 +11,30 @@ int main(int argc, char* argv[]) {
     Q_UNUSED(argv);
 
     qDebug() << "Starting test suite...";
-    qDebug() << "Accessing tests from" << &TestSuite::testList();
     int testCount = TestSuite::testList().size();
-    qDebug() << testCount << (testCount == 1 ? "test detected" : "tests detected");
+    QString testCountString = testCount == 1 ? " test class found." : " test classes found.";
+    qDebug().nospace().noquote() << "Accessing tests from " << &TestSuite::testList() << ": " << testCount << testCountString;
 
     int failedTestsCount = 0;
     for (auto* t : TestSuite::testList()) {
-        qDebug() << "Executing test" << t->testName;
         QString fileName(t->testName + ".xml");
         int result = QTest::qExec(t, QStringList() << " " << "-o" << fileName << "-xunitxml");
-        qDebug() << "=== Test result" << result << "===";
 
-        if (result != 0) {
-            failedTestsCount++;
+        QString resultString;
+        if (result == 0) {
+            // Append check mark for successful test
+            resultString = QChar(0x2713);
+        } else {
+            for (int i = 0; i < result; i++) {
+                // Append X characters for each failed test
+                resultString.append(QChar(0x2717));
+            }
         }
+        qDebug().noquote().nospace() << "- " << t->testName << ": " << resultString;
+        failedTestsCount += result;
     }
-    QString result = failedTestsCount == 0 ? "all tests passed!" : QString::number(failedTestsCount).append("failures detected.");
+    QString failedResult = failedTestsCount == 1 ? "1 TEST FAILED" : (QString::number(failedTestsCount).append(" TESTS FAILED"));
+    QString result = failedTestsCount == 0 ? "ALL TESTS PASSED!" : failedResult;
     qDebug().noquote() << "Test suite complete -" << result;
     return failedTestsCount;
 }

@@ -6,9 +6,7 @@ namespace controllers { // Instance
 static MasterControllerTests instance;
 
 MasterControllerTests::MasterControllerTests()
-    : TestSuite( "MasterControllerTests" )
-{
-}
+    : TestSuite( "MasterControllerTests" ) {}
 
 }
 

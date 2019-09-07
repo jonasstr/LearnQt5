@@ -1,6 +1,7 @@
 #include <QVariant>
 
 #include "datetime-decorator.h"
+#include <QDebug>
 
 namespace cm {
 namespace data {
@@ -17,7 +18,7 @@ public:
 
 DateTimeDecorator::DateTimeDecorator(Entity* parent, const QString& key,
                                  const QString& label, const QDateTime& value)
-    : DataDecorator(parent) {
+    : DataDecorator(parent, key, label) {
 
     impl.reset(new Implementation(this, value));
 }
@@ -28,7 +29,7 @@ const QDateTime& DateTimeDecorator::value() const {
     return impl->value;
 }
 
-const QString& DateTimeDecorator::toIso8601String() const {
+QString DateTimeDecorator::toIso8601String() const {
     if (impl->value.isNull()) {
         return "";
     } else {
@@ -36,7 +37,7 @@ const QString& DateTimeDecorator::toIso8601String() const {
     }
 }
 
-const QString& DateTimeDecorator::toPrettyString() const {
+QString DateTimeDecorator::toPrettyString() const {
     if (impl->value.isNull()) {
         return "Not set";
     } else {
@@ -44,7 +45,7 @@ const QString& DateTimeDecorator::toPrettyString() const {
     }
 }
 
-const QString& DateTimeDecorator::toPrettyDateString() const {
+QString DateTimeDecorator::toPrettyDateString() const {
     if (impl->value.isNull()) {
         return "Not set";
     } else {
@@ -52,7 +53,7 @@ const QString& DateTimeDecorator::toPrettyDateString() const {
     }
 }
 
-const QString& DateTimeDecorator::toPrettyTimeString() const {
+QString DateTimeDecorator::toPrettyTimeString() const {
     if (impl->value.isNull()) {
         return "Not set";
     } else {

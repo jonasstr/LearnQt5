@@ -23,10 +23,10 @@ public:
 
     DateTimeDecorator& setValue(const QDateTime& value);
     const QDateTime& value() const;
-    const QString& toIso8601String() const;
-    const QString& toPrettyDateString() const;
-    const QString& toPrettyTimeString() const;
-    const QString& toPrettyString() const;
+    QString toIso8601String() const;
+    QString toPrettyDateString() const;
+    QString toPrettyTimeString() const;
+    QString toPrettyString() const;
 
     QJsonValue jsonValue() const override;
     void update(const QJsonObject &jsonObject) override;

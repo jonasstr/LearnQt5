@@ -17,7 +17,7 @@ public:
 
 EnumeratorDecorator::EnumeratorDecorator(Entity* parent, const QString& key,
                                  const QString& label, int value, const std::map<int, QString> descriptionMapper)
-    : DataDecorator(parent) {
+    : DataDecorator(parent, key, label) {
 
     impl.reset(new Implementation(this, descriptionMapper, value));
 }

@@ -7,15 +7,13 @@ namespace cm {
 TestSuite::TestSuite(const QString& testName)
     : QObject(), testName(testName) {
 
-    qDebug() << "Creating test" << testName;
+    //qDebug() << "Creating test" << testName;
     testList().push_back(this);
     int testCount = testList().size();
-    QString testsRecorded = "" ;
-    qDebug() << testCount << (testCount == 1 ? "test class found" : "test classes found");
 }
 
 TestSuite::~TestSuite() {
-    qDebug() << "Destroying test...";
+    //qDebug() << "Destroying test" << testName;
 }
 
 std::vector<TestSuite*>& TestSuite::testList() {
