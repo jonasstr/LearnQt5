@@ -17,6 +17,8 @@ class CMLIBSHARED_EXPORT Contact : public data::Entity {
     Q_PROPERTY(cm::data::EnumeratorDecorator* ui_type MEMBER type CONSTANT)
     Q_PROPERTY(cm::data::StringDecorator* ui_address MEMBER address CONSTANT)
 
+public:
+
     enum ContactType {
         UNKNOWN = 0,
         TELEPHONE,
@@ -24,7 +26,6 @@ class CMLIBSHARED_EXPORT Contact : public data::Entity {
         FAX
     };
 
-public:
     explicit Contact(QObject* parent = nullptr);
     Contact(QObject *parent, const QJsonObject& json);
 

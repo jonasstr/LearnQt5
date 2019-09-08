@@ -21,8 +21,6 @@ class CMLIBSHARED_EXPORT Appointment : public data::Entity {
 public:
     explicit Appointment(QObject* parent = nullptr);
     Appointment(QObject *parent, const QJsonObject& json);
-
-private:
     data::DateTimeDecorator* startAt;
     data::DateTimeDecorator* endAt;
     data::StringDecorator* notes;

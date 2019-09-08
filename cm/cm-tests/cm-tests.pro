@@ -22,7 +22,8 @@ HEADERS += \
     src/data/int-decorator-tests.h \
     src/data/datetime-decorator-tests.h \
     src/data/enumerator-decorator-tests.h \
-    src/data/string-decorator-tests.h
+    src/data/string-decorator-tests.h \
+    src/models/client-tests.h
 
 SOURCES += src/test-suite.cpp \
     src/controllers/master-controller-tests.cpp \
@@ -30,7 +31,8 @@ SOURCES += src/test-suite.cpp \
     src/data/int-decorator-tests.cpp \
     src/data/datetime-decorator-tests.cpp \
     src/data/enumerator-decorator-tests.cpp \
-    src/data/string-decorator-tests.cpp
+    src/data/string-decorator-tests.cpp \
+    src/models/client-tests.cpp
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj

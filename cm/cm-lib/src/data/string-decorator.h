@@ -25,7 +25,7 @@ public:
 signals:
     void valueChanged();
 
-private:
+public:
     class Implementation;
     QScopedPointer<Implementation> impl;
 };
