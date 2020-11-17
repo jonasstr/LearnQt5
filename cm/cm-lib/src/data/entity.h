@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include "data/string-decorator.h"
 #include "data/data-decorator.h"
 #include "data/entity-collection.h"
 
@@ -19,6 +20,9 @@ public:
     virtual ~Entity();
 
     const QString& key() const;
+    const QString& id() const;
+    void setPrimaryKey(StringDecorator* primaryKey);
+
     void update(const QJsonObject& jsonObject);
     QJsonObject toJson() const;
 

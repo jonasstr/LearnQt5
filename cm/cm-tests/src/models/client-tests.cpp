@@ -36,9 +36,9 @@ void ClientTests::constructor_parentAndJsonObject_setsParentAndProperties() {
     verifySupplyAddress(client.supplyAddress);
     QVERIFY(client.appointments != nullptr);
     verifyAppointments(client.appointments->derivedEntities());
-    //verifyContacts(client.contacts->derivedEntities());*/
+    //verifyContacts(client.contacts->derivedEntities());
 }
-
+/*
 void ClientTests::toJson_defaultProperties_constructsJson() {
 
     Client client(this);
@@ -81,7 +81,7 @@ void ClientTests::toJson_setProperties_constructsJson() {
     verifyContacts(client.contacts->derivedEntities());
 }
 
-void ClientTests::update_jsonObject_updatesProperties() {
+/*void ClientTests::update_jsonObject_updatesProperties() {
     Client testClient(this);
 
     testClient.update(QJsonDocument::fromJson(jsonByteArray).object());
@@ -91,6 +91,8 @@ void ClientTests::update_jsonObject_updatesProperties() {
 
     verifyBillingAddress(testClient.billingAddress);
     verifySupplyAddress(testClient.supplyAddress);
+    QVERIFY(testClient.appointments != nullptr);
+
     verifyAppointments(testClient.appointments->derivedEntities());
     verifyContacts(testClient.contacts->derivedEntities());
 }
@@ -115,6 +117,25 @@ void ClientTests::update_emptyJsonObject_updatesPropertiesToDefaults() {
     verifyDefaultSupplyAddress(testClient.supplyAddress);
     verifyDefaultAppointments(testClient.appointments->derivedEntities());
     verifyDefaultContacts(testClient.contacts->derivedEntities());
+}*/
+
+void ClientTests::id_primaryKeyNoValue_returnsUuid() {
+    Client client(this);
+    // Using individual character checks
+    QCOMPARE(client.id().left(1), QString("{"));
+    QCOMPARE(client.id().mid(9, 1), QString("-"));
+    QCOMPARE(client.id().mid(14, 1), QString("-"));
+    QCOMPARE(client.id().mid(19, 1), QString("-"));
+    QCOMPARE(client.id().mid(24, 1), QString("-"));
+    QCOMPARE(client.id().right(1), QString("}"));
+    // Using regular expression pattern matching
+    QVERIFY(QRegularExpression("\\{.{8}-(.{4})-(.{4})-(.{4})-(.{12})\\}").match(client.id()).hasMatch());
+}
+
+void ClientTests::id_primaryKeyWithValue_returnsPrimaryKey() {
+    Client client(this, QJsonDocument::fromJson(jsonByteArray).object());
+    QCOMPARE(client.reference->value(), QString("CM0001"));
+    QCOMPARE(client.id(), client.reference->value());
 }
 
 void ClientTests::verifyDefaultBillingAddress(const QJsonObject& jsonObject) {

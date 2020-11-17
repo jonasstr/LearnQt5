@@ -2,6 +2,7 @@ include(../qmake-target-platform.pri)
 include(../qmake-destination-path.pri)
 
 QT -= gui
+QT += sql
 
 TARGET = cm-lib
 TEMPLATE = lib
@@ -25,7 +26,8 @@ SOURCES += src/models/client.cpp \
     src/data/entity.cpp \
     src/models/address.cpp \
     src/models/appointment.cpp \
-    src/models/contact.cpp
+    src/models/contact.cpp \
+    src/controllers/database-controller.cpp
 
 HEADERS += src/models/client.h \
         src/cm-lib_global.h \
@@ -42,7 +44,9 @@ HEADERS += src/models/client.h \
     src/data/entity-collection.h \
     src/models/address.h \
     src/models/appointment.h \
-    src/models/contact.h
+    src/models/contact.h \
+    src/controllers/i-database-controller.h \
+    src/controllers/database-controller.h
 
 DESTDIR = $$PWD/../build/$$DESTINATION_PATH
 OBJECTS_DIR = $$PWD/../build/$$DESTINATION_PATH/.obj

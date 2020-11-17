@@ -15,10 +15,12 @@ int main(int argc, char* argv[]) {
     QString testCountString = testCount == 1 ? " test class found." : " test classes found.";
     qDebug().nospace().noquote() << "Accessing tests from " << &TestSuite::testList() << ": " << testCount << testCountString;
 
+    QDir testDir(".");
+    testDir.mkdir("tests/");
     int failedTestsCount = 0;
     for (auto* t : TestSuite::testList()) {
-        QString fileName(t->testName + ".xml");
-        int result = QTest::qExec(t, QStringList() << " " << "-o" << fileName << "-xunitxml");
+        QString testFileName("tests/" + t->testName + ".xml");
+        int result = QTest::qExec(t, QStringList() << " " << "-o" << testFileName << "-xunitxml");
 
         QString resultString;
         if (result == 0) {
@@ -36,5 +38,6 @@ int main(int argc, char* argv[]) {
     QString failedResult = failedTestsCount == 1 ? "1 TEST FAILED" : (QString::number(failedTestsCount).append(" TESTS FAILED"));
     QString result = failedTestsCount == 0 ? "ALL TESTS PASSED!" : failedResult;
     qDebug().noquote() << "Test suite complete -" << result;
+    qDebug().noquote() << "Saving test results to" << testDir.absoluteFilePath("tests");
     return failedTestsCount;
 }

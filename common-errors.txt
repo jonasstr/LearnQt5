@@ -19,3 +19,8 @@ Symbol lookup error for class: undefined symbol:
 virtual ~SomeClassName();
 with
 virtual ~SomeClassName() {}
+
+Register field for QDoubleSpinBox not working
+→ Example: registerField("field.name", box, "value", SIGNAL(QDoubleSpinBox::valueChanged));
+or registerField("field.name", box, "value", "valueChanged");
+Can only be accessed using .field("field.name") OUTSIDE OF CONSTRUCTOR!

@@ -14,6 +14,7 @@ Client::Client(QObject* parent)
     billingAddress = static_cast<Address*>(addChild(new Address(this), "billingAddress"));
     appointments = static_cast<EntityCollection<Appointment>*>(addChildCollection(new EntityCollection<Appointment>(this, "appointments")));
     contacts = static_cast<EntityCollection<Contact>*>(addChildCollection(new EntityCollection<Contact>(this, "contacts")));
+    setPrimaryKey(reference);
 }
 
 Client::Client(QObject *parent, const QJsonObject &json)

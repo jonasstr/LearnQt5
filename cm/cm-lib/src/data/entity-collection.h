@@ -1,37 +1,43 @@
 #ifndef ENTITYCOLLECTION_H
 #define ENTITYCOLLECTION_H
 
-#include <QObject>
 #include <QJsonObject>
-#include <QJsonValue>
 #include <QJsonArray>
+#include <QJsonValue>
+#include <QObject>
 
-#include "cm-lib_global.h"
+#include <cm-lib_global.h>
 
 namespace cm {
 namespace data {
 
 class Entity;
-class CMLIBSHARED_EXPORT EntityCollectionObject : public QObject {
 
+class CMLIBSHARED_EXPORT EntityCollectionObject : public QObject
+{
     Q_OBJECT
 
 public:
-    EntityCollectionObject(QObject* parent = nullptr) : QObject(parent) {}
+    EntityCollectionObject(QObject* _parent = nullptr) : QObject(_parent) {}
     virtual ~EntityCollectionObject() {}
 
 signals:
     void collectionChanged();
 };
 
-class EntityCollectionBase : public EntityCollectionObject {
+class EntityCollectionBase : public EntityCollectionObject
+{
 public:
-    EntityCollectionBase(QObject* parent = nullptr,
-                         const QString& key = "SomeCollectionKey")
-        : EntityCollectionObject(parent), key(key) {}
+    EntityCollectionBase(QObject* parent = nullptr, const QString& key = "SomeCollectionKey")
+        : EntityCollectionObject(parent)
+        , key(key)
+    {}
 
-    virtual ~EntityCollectionBase() {}
-    QString getKey() const {
+    virtual ~EntityCollectionBase()
+    {}
+
+    QString getKey() const
+    {
         return key;
     }
 
@@ -39,50 +45,60 @@ public:
     virtual void update(const QJsonArray& json) = 0;
     virtual std::vector<Entity*> baseEntities() = 0;
 
-    template <class T> QList<T*>& derivedEntities();
-    template <class T> T* addEntity(T* entity);
+    template <class T>
+    QList<T*>& derivedEntities();
+
+    template <class T>
+    T* addEntity(T* entity);
 
 private:
     QString key;
 };
 
 template <typename T>
-class EntityCollection : public EntityCollectionBase {
-
+class EntityCollection : public EntityCollectionBase
+{
 public:
     EntityCollection(QObject* parent = nullptr, const QString& key = "SomeCollectionKey")
-        : EntityCollectionBase(parent, key) {}
+        : EntityCollectionBase(parent, key)
+    {}
 
-    ~EntityCollection() {}
+    ~EntityCollection()
+    {}
 
-    void clear() override {
-        for (auto entity : collection) {
+    void clear() override
+    {
+        for(auto entity : collection) {
             entity->deleteLater();
         }
         collection.clear();
     }
 
-    void update(const QJsonArray& jsonArray) override {
+    void update(const QJsonArray& jsonArray) override
+    {
         clear();
-        for (const QJsonValue& value : jsonArray) {
-            addEntity(new T(this, value.toObject()));
+        for(const QJsonValue& jsonValue : jsonArray) {
+            addEntity(new T(this, jsonValue.toObject()));
         }
     }
 
-    std::vector<Entity*> baseEntities() override {
-        std::vector<Entity*> entities;
-        for (T* entity : collection) {
-            entities.push_back(entity);
+    std::vector<Entity*> baseEntities() override
+    {
+        std::vector<Entity*> returnValue;
+        for(T* entity : collection) {
+            returnValue.push_back(entity);
         }
-        return entities;
+        return returnValue;
     }
 
-    QList<T*>& derivedEntities() {
+    QList<T*>& derivedEntities()
+    {
         return collection;
     }
 
-    T* addEntity(T* entity) {
-        if (!collection.contains(entity)) {
+    T* addEntity(T* entity)
+    {
+        if(!collection.contains(entity)) {
             collection.append(entity);
             EntityCollectionObject::collectionChanged();
         }
@@ -94,15 +110,17 @@ private:
 };
 
 template <class T>
-QList<T*>& EntityCollectionBase::derivedEntities() {
+QList<T*>& EntityCollectionBase::derivedEntities()
+{
     return dynamic_cast<const EntityCollection<T>&>(*this).derivedEntities();
 }
 
 template <class T>
-T* EntityCollectionBase::addEntity(T* entity) {
+T* EntityCollectionBase::addEntity(T* entity)
+{
     return dynamic_cast<const EntityCollection<T>&>(*this).addEntity(entity);
 }
 
 }}
 
-#endif // ENTITYCOLLECTION_H
+#endif

@@ -21,10 +21,13 @@ public:
 private slots:
     void constructor_parent_setsParentAndDefaultProperties();
     void constructor_parentAndJsonObject_setsParentAndProperties();
-    void toJson_defaultProperties_constructsJson();
-    void toJson_setProperties_constructsJson();
-    void update_jsonObject_updatesProperties();
-    void update_emptyJsonObject_updatesPropertiesToDefaults();
+    //void toJson_defaultProperties_constructsJson();
+    //void toJson_setProperties_constructsJson();
+    //void update_jsonObject_updatesProperties();
+    //void update_emptyJsonObject_updatesPropertiesToDefaults();
+
+    void id_primaryKeyNoValue_returnsUuid();
+    void id_primaryKeyWithValue_returnsPrimaryKey();
 
 private:
     void verifyBillingAddress(const QJsonObject& jsonObject);

@@ -1,5 +1,7 @@
 #include "master-controller.h"
 
+#include "database-controller.h"
+
 namespace cm {
 namespace controllers {
 
@@ -8,11 +10,13 @@ public:
     Implementation(MasterController* controller)
         : masterController(controller) {
 
+        databaseController = new DatabaseController(masterController);
         commandController = new CommandController(masterController);
         navigationController = new NavigationController(masterController);
         newClient = new Client(masterController);
     }
 
+    DatabaseController* databaseController;
     MasterController* masterController;
     CommandController* commandController;
     NavigationController* navigationController;
@@ -26,6 +30,10 @@ MasterController::MasterController(QObject *parent) : QObject(parent) {
 }
 
 MasterController::~MasterController() {}
+
+DatabaseController* MasterController::databaseController() {
+    return impl->databaseController;
+}
 
 CommandController* MasterController::commandController() {
     return impl->commandController;

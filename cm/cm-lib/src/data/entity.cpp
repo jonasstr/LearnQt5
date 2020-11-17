@@ -1,6 +1,7 @@
 #include "entity.h"
 
 #include <QJsonArray>
+#include <QUuid>
 
 namespace cm {
 namespace data {
@@ -8,11 +9,13 @@ namespace data {
 class Entity::Implementation {
 
 public:
-    Implementation(Entity* _entity, const QString& _key)
-        : entity(_entity), key(_key) {}
+    Implementation(Entity* entity, const QString& key)
+        : entity(entity), key(key), id(QUuid::createUuid().toString()) {}
 
     Entity* entity{nullptr};
     QString key;
+    QString id;
+    StringDecorator* primaryKey{nullptr};
     std::map<QString, Entity*> childEntities;
     std::map<QString, DataDecorator*> dataDecorators;
     std::map<QString, EntityCollectionBase*> childCollections;
@@ -34,6 +37,17 @@ Entity::~Entity() {}
 
 const QString& Entity::key() const {
     return impl->key;
+}
+
+const QString& Entity::id() const {
+    if (impl->primaryKey != nullptr && !impl->primaryKey->value().isEmpty()) {
+        return impl->primaryKey->value();
+    }
+    return impl->id;
+}
+
+void Entity::setPrimaryKey(StringDecorator* primaryKey) {
+    impl->primaryKey = primaryKey;
 }
 
 Entity* Entity::addChild(Entity* entity, const QString& key) {
@@ -61,6 +75,11 @@ DataDecorator* Entity::addDataItem(DataDecorator* dataDecorator) {
 }
 
 void Entity::update(const QJsonObject& jsonObject) {
+
+    // Update ID if already present
+    if (jsonObject.contains("id")) {
+        impl->id = jsonObject.value("id").toString();
+    }
     // Update data decorators
     for (std::pair<QString, DataDecorator*> dataDecoratorPair : impl->dataDecorators) {
         dataDecoratorPair.second->update(jsonObject);
@@ -77,6 +96,7 @@ void Entity::update(const QJsonObject& jsonObject) {
 
 QJsonObject Entity::toJson() const {
     QJsonObject returnValue;
+    returnValue.insert("id", impl->id);
     // Add data decorators
     for (std::pair<QString, DataDecorator*> dataDecoratorPair : impl->dataDecorators) {
         returnValue.insert(dataDecoratorPair.first, dataDecoratorPair.second->jsonValue());
